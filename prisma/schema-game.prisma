@@ -1,0 +1,29 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL_GAME")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/game"
+}
+
+model Item {
+  id       Int    @id @default(autoincrement())
+  code     Int    @unique
+  name     String
+  stat     Json
+}
+
+model CharacterInventory {
+  id          Int      @id @default(autoincrement())
+  characterId Int
+  itemId      Int
+  count       Int
+}
+
+model CharacterItem {
+  id          Int      @id @default(autoincrement())
+  characterId Int
+  itemId      Int
+}
